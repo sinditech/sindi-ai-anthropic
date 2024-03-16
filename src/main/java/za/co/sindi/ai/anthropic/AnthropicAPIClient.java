@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 import za.co.sindi.ai.anthropic.implementation.JSONObjectTransformerImpl;
-import za.co.sindi.ai.anthropic.models.HttpError;
+import za.co.sindi.ai.anthropic.models.ErrorResponse;
 
 /**
  * @author Buhake Sindi
@@ -126,7 +126,7 @@ public class AnthropicAPIClient implements APIClient {
 	private void validateHttpResponse(final HttpResponse<String> httpResponse) {
 		int code = httpResponse.statusCode() / 100;
 		if (code == 4 || code == 5) {
-			HttpError httpError = objectTransformer.transform(httpResponse.body(), HttpError.class);
+			ErrorResponse httpError = objectTransformer.transform(httpResponse.body(), ErrorResponse.class);
 			throw new AnthropicAIException(httpError.getError());
 		}
 	}

@@ -14,6 +14,22 @@ public class InputContentMessage extends InputMessage<Content> {
 	@JsonbProperty
 	private Content content;
 	
+	/**
+	 * 
+	 */
+	public InputContentMessage() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param content
+	 */
+	public InputContentMessage(Content content) {
+		super();
+		this.content = content;
+	}
+
 	@Override
 	public Content getContent() {
 		// TODO Auto-generated method stub

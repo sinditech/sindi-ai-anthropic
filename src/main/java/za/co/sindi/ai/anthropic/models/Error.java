@@ -15,7 +15,7 @@ import jakarta.json.bind.annotation.JsonbTypeInfo;
  * @since 16 March 2024
  */
 @JsonbTypeInfo(
-	key = "error",
+	key = "type",
 	value = {
 	    @JsonbSubtype(alias="invalid_request_error", type=InvalidRequestError.class),
 	    @JsonbSubtype(alias="authentication_error", type=AuthenticationError.class),

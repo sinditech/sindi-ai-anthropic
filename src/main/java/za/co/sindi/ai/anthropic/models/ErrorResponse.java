@@ -11,7 +11,7 @@ import jakarta.json.bind.annotation.JsonbProperty;
  * @author Buhake Sindi
  * @since 16 March 2024
  */
-public class HttpError implements Serializable {
+public class ErrorResponse implements Serializable {
 
 	@JsonbProperty
 	private String type;

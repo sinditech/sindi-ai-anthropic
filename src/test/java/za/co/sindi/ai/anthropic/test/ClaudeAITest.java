@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import za.co.sindi.ai.anthropic.AnthropicAI;
-import za.co.sindi.ai.anthropic.implementation.Claude3AI;
+import za.co.sindi.ai.anthropic.implementation.ClaudeAI;
 import za.co.sindi.ai.anthropic.models.ClaudeModelNames;
 import za.co.sindi.ai.anthropic.models.InputMessage;
 import za.co.sindi.ai.anthropic.models.InputStringMessage;
@@ -20,14 +20,14 @@ import za.co.sindi.ai.anthropic.models.TextContent;
  * @author Buhake Sindi
  * @since 16 March 2024
  */
-public class Claude3AITest {
+public class ClaudeAITest {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		testClaude3Message();
+		testClaudeMessage();
 	}
 	
-	private static void testClaude3Message() throws IOException, InterruptedException {
-		AnthropicAI ai = new Claude3AI("asdfsdfsdfasdfasdf");
+	private static void testClaudeMessage() throws IOException, InterruptedException {
+		AnthropicAI ai = new ClaudeAI("asdfsdfsdfasdfasdf");
 		List<InputMessage<?>> messages = new ArrayList<>();
 		messages.add(new InputStringMessage("Please tell me a joke."));
 		MessageInput input = new MessageInput(ClaudeModelNames.CLAUDE_3_OPUS.getModelName(), messages, 1000);

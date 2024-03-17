@@ -21,7 +21,7 @@ import za.co.sindi.ai.anthropic.models.MessageInput;
  * @author Buhake Sindi
  * @since 16 March 2024
  */
-public class Claude3AI implements AnthropicAI {
+public class ClaudeAI implements AnthropicAI {
 	
 	private static final String BASE_URL = "https://api.anthropic.com/v1";
 	
@@ -30,7 +30,7 @@ public class Claude3AI implements AnthropicAI {
 	/**
 	 * @param apiKey
 	 */
-	public Claude3AI(final String apiKey) {
+	public ClaudeAI(final String apiKey) {
 		this(new AnthropicAPIClient(apiKey));
 	}
 	
@@ -38,14 +38,14 @@ public class Claude3AI implements AnthropicAI {
 	 * @param apiKey
 	 * @param anthropicVersion
 	 */
-	public Claude3AI(final String apiKey, final String anthropicVersion) {
+	public ClaudeAI(final String apiKey, final String anthropicVersion) {
 		this(new AnthropicAPIClient(apiKey, anthropicVersion));
 	}
 	
 	/**
 	 * @param apiClient
 	 */
-	public Claude3AI(APIClient apiClient) {
+	public ClaudeAI(APIClient apiClient) {
 		super();
 		this.apiClient = Objects.requireNonNull(apiClient, "An Anthropic API Client is required.");
 	}

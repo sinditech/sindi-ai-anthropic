@@ -13,10 +13,10 @@ import jakarta.json.bind.annotation.JsonbProperty;
  */
 public class Usage implements Serializable {
 
-	@JsonbProperty
+	@JsonbProperty("input_tokens")
 	private int inputTokens;
 	
-	@JsonbProperty
+	@JsonbProperty("output_tokens")
 	private int outputTokens;
 
 	/**

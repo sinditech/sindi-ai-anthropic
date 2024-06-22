@@ -17,6 +17,7 @@ import jakarta.json.bind.annotation.JsonbTypeInfo;
 	value = {
 	    @JsonbSubtype(alias="text", type=TextContent.class),
 	    @JsonbSubtype(alias="image", type=ImageContent.class),
+	    @JsonbSubtype(alias="tool_use", type=ToolUseContent.class),
 	}
 )
 public abstract class Content implements Serializable {

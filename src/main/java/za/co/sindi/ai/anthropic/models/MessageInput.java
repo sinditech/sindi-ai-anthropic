@@ -42,6 +42,12 @@ public class MessageInput implements Serializable {
 	@JsonbProperty
 	private Double temperature;
 	
+	@JsonbProperty("tool_choice")
+	private ToolChoice toolChoice;
+	
+	@JsonbProperty
+	private Tool[] tools;
+	
 	@JsonbProperty("top_p")
 	private Double topP;
 	
@@ -142,6 +148,34 @@ public class MessageInput implements Serializable {
 	 */
 	public void setTemperature(Double temperature) {
 		this.temperature = temperature;
+	}
+
+	/**
+	 * @return the toolChoice
+	 */
+	public ToolChoice getToolChoice() {
+		return toolChoice;
+	}
+
+	/**
+	 * @return the tools
+	 */
+	public Tool[] getTools() {
+		return tools;
+	}
+
+	/**
+	 * @param tools the tools to set
+	 */
+	public void setTools(Tool[] tools) {
+		this.tools = tools;
+	}
+
+	/**
+	 * @param toolChoice the toolChoice to set
+	 */
+	public void setToolChoice(ToolChoice toolChoice) {
+		this.toolChoice = toolChoice;
 	}
 
 	/**

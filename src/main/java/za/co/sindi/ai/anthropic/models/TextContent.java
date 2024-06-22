@@ -15,14 +15,6 @@ public class TextContent extends Content {
 	private String text;
 
 	/**
-	 * @param text
-	 */
-	public TextContent(String text) {
-		super();
-		this.text = text;
-	}
-
-	/**
 	 * @return the text
 	 */
 	public String getText() {

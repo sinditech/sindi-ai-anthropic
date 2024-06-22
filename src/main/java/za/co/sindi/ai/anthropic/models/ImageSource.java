@@ -6,6 +6,8 @@ package za.co.sindi.ai.anthropic.models;
 import java.io.Serializable;
 
 import jakarta.json.bind.annotation.JsonbProperty;
+import jakarta.json.bind.annotation.JsonbTypeAdapter;
+import za.co.sindi.ai.anthropic.implementation.JsonbImageMediaTypeAdapter;
 
 /**
  * @author Buhake Sindi
@@ -17,6 +19,7 @@ public class ImageSource implements Serializable {
 	private String type;
 	
 	@JsonbProperty("media_type")
+	@JsonbTypeAdapter(JsonbImageMediaTypeAdapter.class)
 	private ImageMediaType mediaType;
 	
 	@JsonbProperty

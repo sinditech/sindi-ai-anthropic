@@ -2,6 +2,7 @@ package za.co.sindi.ai.anthropic.models;
 
 import java.io.Serializable;
 
+import jakarta.json.bind.annotation.JsonbProperty;
 import jakarta.json.bind.annotation.JsonbSubtype;
 import jakarta.json.bind.annotation.JsonbTypeInfo;
 
@@ -19,4 +20,20 @@ import jakarta.json.bind.annotation.JsonbTypeInfo;
 )
 public abstract class ToolChoice implements Serializable {
 
+	@JsonbProperty("disable_parallel_tool_use")
+	private Boolean disableParallelToolUse;
+
+	/**
+	 * @return the disableParallelToolUse
+	 */
+	public Boolean getDisableParallelToolUse() {
+		return disableParallelToolUse;
+	}
+
+	/**
+	 * @param disableParallelToolUse the disableParallelToolUse to set
+	 */
+	public void setDisableParallelToolUse(Boolean disableParallelToolUse) {
+		this.disableParallelToolUse = disableParallelToolUse;
+	}
 }

@@ -33,6 +33,7 @@ public class AnthropicAPIClient implements APIClient {
 	
 	private final String apiKey;
 	private final String anthropicVersion;
+	private final String[] anthropicBeta;
 	
 	/**
 	 * @param apiKey
@@ -46,9 +47,19 @@ public class AnthropicAPIClient implements APIClient {
 	 * @param anthropicVersion
 	 */
 	public AnthropicAPIClient(String apiKey, String anthropicVersion) {
+		this(apiKey, anthropicVersion, (String[])null);
+	}
+
+	/**
+	 * @param apiKey
+	 * @param anthropicVersion
+	 * @param anthropicBeta
+	 */
+	public AnthropicAPIClient(String apiKey, String anthropicVersion, String... anthropicBeta) {
 		super();
 		this.apiKey = Objects.requireNonNull(apiKey, "An Anthropic 'x-api-key' is required.");
-		this.anthropicVersion = Objects.requireNonNull(anthropicVersion, "An Anthropic 'anthropic-version' is required.");;
+		this.anthropicVersion = Objects.requireNonNull(anthropicVersion, "An Anthropic 'anthropic-version' is required.");
+		this.anthropicBeta = anthropicBeta;
 	}
 
 	@Override
@@ -98,12 +109,16 @@ public class AnthropicAPIClient implements APIClient {
 	}
 	
 	private <REQ> HttpRequest.Builder createHttpRequestBuilder(final APIRequest<REQ> request) {
-		return HttpRequest.newBuilder(URI.create(request.getUri()))
+		HttpRequest.Builder builder = HttpRequest.newBuilder(URI.create(request.getUri()))
 						  .header("Content-Type", "application/json")
 						  .header("Accept", "application/json")
 						  .header("x-api-key", apiKey)
 						  .header("anthropic-version", anthropicVersion)
 						  .POST(BodyPublishers.ofString(objectTransformer.transform(request.getRequestBody()), StandardCharsets.UTF_8));
+		if (anthropicBeta != null) {
+			builder.header("anthropic-beta", String.join(",", anthropicBeta));
+		}
+		return builder;
 	}
 	
 	private HttpClient createHttpClient() {

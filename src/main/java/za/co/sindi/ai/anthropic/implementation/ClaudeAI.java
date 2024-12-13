@@ -11,9 +11,12 @@ import za.co.sindi.ai.anthropic.APIClient;
 import za.co.sindi.ai.anthropic.AnthropicAI;
 import za.co.sindi.ai.anthropic.AnthropicAPIClient;
 import za.co.sindi.ai.anthropic.completions.CreateCompletionRequest;
+import za.co.sindi.ai.anthropic.messages.CountMessageTokensRequest;
 import za.co.sindi.ai.anthropic.messages.CreateMessageRequest;
 import za.co.sindi.ai.anthropic.models.Completion;
 import za.co.sindi.ai.anthropic.models.CompletionPrompt;
+import za.co.sindi.ai.anthropic.models.CountMessage;
+import za.co.sindi.ai.anthropic.models.CountMessageTokens;
 import za.co.sindi.ai.anthropic.models.Message;
 import za.co.sindi.ai.anthropic.models.MessageInput;
 
@@ -62,6 +65,25 @@ public class ClaudeAI implements AnthropicAI {
 		// TODO Auto-generated method stub
 		CreateMessageRequest request = new CreateMessageRequest(BASE_URL + "/messages", input);
 		return apiClient.sendAsync(request, Message.class);
+	}
+
+	/* (non-Javadoc)
+	 * @see za.co.sindi.ai.anthropic.AnthropicAI#countMessageTokens(za.co.sindi.ai.anthropic.models.MessageInput)
+	 */
+	@Override
+	public CountMessageTokens countMessageTokens(CountMessage message) throws IOException, InterruptedException {
+		// TODO Auto-generated method stub
+		CountMessageTokensRequest request = new CountMessageTokensRequest(BASE_URL + "/messages/count_tokens", message);
+		return apiClient.send(request, CountMessageTokens.class);
+	}
+
+	/* (non-Javadoc)
+	 * @see za.co.sindi.ai.anthropic.AnthropicAI#countMessageTokensAsync(za.co.sindi.ai.anthropic.models.MessageInput)
+	 */
+	@Override
+	public CompletableFuture<CountMessageTokens> countMessageTokensAsync(CountMessage message) {
+		CountMessageTokensRequest request = new CountMessageTokensRequest(BASE_URL + "/messages/count_tokens", message);
+		return apiClient.sendAsync(request, CountMessageTokens.class);
 	}
 
 	@Override

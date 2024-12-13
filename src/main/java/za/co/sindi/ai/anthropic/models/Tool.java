@@ -2,16 +2,16 @@ package za.co.sindi.ai.anthropic.models;
 
 import java.io.Serializable;
 
-import jakarta.json.JsonObject;
 import jakarta.json.bind.annotation.JsonbProperty;
-import jakarta.json.bind.annotation.JsonbTypeAdapter;
-import za.co.sindi.ai.anthropic.implementation.JsonObjectJsonbAdapter;
 
 /**
  * @author Buhake Sindi
  * @since 21 June 2024
  */
 public class Tool implements Serializable {
+	
+	@JsonbProperty("cache-control")
+	private CacheControl cacheControl;
 
 	@JsonbProperty
 	private String name;
@@ -20,8 +20,22 @@ public class Tool implements Serializable {
 	private String description;
 	
 	@JsonbProperty("input_schema")
-	@JsonbTypeAdapter(JsonObjectJsonbAdapter.class)
-	private JsonObject inputSchema;
+//	@JsonbTypeAdapter(JsonObjectJsonbAdapter.class)
+	private JsonSchema inputSchema;
+
+	/**
+	 * @return the cacheControl
+	 */
+	public CacheControl getCacheControl() {
+		return cacheControl;
+	}
+
+	/**
+	 * @param cacheControl the cacheControl to set
+	 */
+	public void setCacheControl(CacheControl cacheControl) {
+		this.cacheControl = cacheControl;
+	}
 
 	/**
 	 * @return the name
@@ -54,14 +68,14 @@ public class Tool implements Serializable {
 	/**
 	 * @return the inputSchema
 	 */
-	public JsonObject getInputSchema() {
+	public JsonSchema getInputSchema() {
 		return inputSchema;
 	}
 
 	/**
 	 * @param inputSchema the inputSchema to set
 	 */
-	public void setInputSchema(JsonObject inputSchema) {
+	public void setInputSchema(JsonSchema inputSchema) {
 		this.inputSchema = inputSchema;
 	}
 }

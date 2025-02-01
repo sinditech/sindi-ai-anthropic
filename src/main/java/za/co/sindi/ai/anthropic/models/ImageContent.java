@@ -12,12 +12,12 @@ import jakarta.json.bind.annotation.JsonbProperty;
 public class ImageContent extends Content {
 
 	@JsonbProperty
-	private ImageSource source;
+	private Base64DataContentSource source;
 
 	/**
 	 * @param source
 	 */
-	public ImageContent(final ImageSource source) {
+	public ImageContent(final Base64DataContentSource source) {
 		super();
 		this.source = source;
 	}
@@ -25,7 +25,7 @@ public class ImageContent extends Content {
 	/**
 	 * @return the source
 	 */
-	public ImageSource getSource() {
+	public Base64DataContentSource getSource() {
 		return source;
 	}
 }

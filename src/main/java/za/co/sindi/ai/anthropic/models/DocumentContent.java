@@ -12,20 +12,70 @@ import jakarta.json.bind.annotation.JsonbProperty;
 public class DocumentContent extends Content {
 
 	@JsonbProperty
-	private ImageSource source;
-
-	/**
-	 * @param source
-	 */
-	public DocumentContent(final ImageSource source) {
-		super();
-		this.source = source;
-	}
+	private DataContentSource source;
+	
+	@JsonbProperty
+	private String context;
+	
+	@JsonbProperty
+	private DocumentCitation citations;
+	
+	@JsonbProperty
+	private String title;
 
 	/**
 	 * @return the source
 	 */
-	public ImageSource getSource() {
+	public DataContentSource getSource() {
 		return source;
+	}
+
+	/**
+	 * @param source the source to set
+	 */
+	public void setSource(DataContentSource source) {
+		this.source = source;
+	}
+
+	/**
+	 * @return the context
+	 */
+	public String getContext() {
+		return context;
+	}
+
+	/**
+	 * @param context the context to set
+	 */
+	public void setContext(String context) {
+		this.context = context;
+	}
+
+	/**
+	 * @return the citations
+	 */
+	public DocumentCitation getCitations() {
+		return citations;
+	}
+
+	/**
+	 * @param citations the citations to set
+	 */
+	public void setCitations(DocumentCitation citations) {
+		this.citations = citations;
+	}
+
+	/**
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * @param title the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
 	}
 }

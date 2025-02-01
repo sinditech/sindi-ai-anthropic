@@ -8,6 +8,9 @@ import java.net.ProxySelector;
 import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import java.util.stream.Stream;
+
+import za.co.sindi.ai.anthropic.models.event.Event;
 
 /**
  * @author Buhake Sindi
@@ -34,4 +37,6 @@ public interface APIClient {
 
 	public <REQ, RES> RES send(final APIRequest<REQ> apiRequest, Class<RES> responseType) throws IOException, InterruptedException;
 	public <REQ, RES> CompletableFuture<RES> sendAsync(final APIRequest<REQ> apiRequest, Class<RES> responseType);
+	public <REQ> Stream<Event> sendStreaming(final APIRequest<REQ> apiRequest) throws IOException, InterruptedException;
+	public <REQ> CompletableFuture<Stream<Event>> sendStreamingAsync(final APIRequest<REQ> apiRequest);
 }

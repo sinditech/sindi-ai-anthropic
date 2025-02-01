@@ -9,14 +9,18 @@ package za.co.sindi.ai.anthropic.models;
  * @see <a href="https://docs.anthropic.com/en/docs/about-claude/models">Model names</a>
  */
 public enum ClaudeModelNames {
-	CLAUDE_3_5_SONNET("claude-3-5-sonnet-20240620")
+	CLAUDE_3_5_SONNET_20240620("claude-3-5-sonnet-20240620")
 	,CLAUDE_3_5_SONNET_20241022("claude-3-5-sonnet-20241022")
+	,CLAUDE_3_5_SONNET_LATEST("claude-3-5-sonnet-latest")
 	,CLAUDE_3_OPUS("claude-3-opus-20240229")
+	,CLAUDE_3_OPUS_LATEST("claude-3-opus-latest")
 	,CLAUDE_3_SONNET("claude-3-sonnet-20240229")
 	,CLAUDE_3_HAIKU("claude-3-haiku-20240307")
-	,CLAUDE_2_1("claude-2.1")
-	,CLAUDE_2_0("claude-2.0")
-	,CLAUDE_INSTANT_1_2("claude-instant-1.2")
+	,CLAUDE_3_HAIKU_20241022("claude-3-haiku-20241022")
+	,CLAUDE_3_HAIKU_LATEST("claude-3-haiku-latest")
+	,@Deprecated CLAUDE_2_1("claude-2.1")
+	,@Deprecated CLAUDE_2_0("claude-2.0")
+	,@Deprecated CLAUDE_INSTANT_1_2("claude-instant-1.2")
 	;
 	private final String modelName;
 

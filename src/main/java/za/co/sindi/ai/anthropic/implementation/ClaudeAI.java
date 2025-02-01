@@ -6,6 +6,7 @@ package za.co.sindi.ai.anthropic.implementation;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Stream;
 
 import za.co.sindi.ai.anthropic.APIClient;
 import za.co.sindi.ai.anthropic.AnthropicAI;
@@ -19,6 +20,7 @@ import za.co.sindi.ai.anthropic.models.CountMessage;
 import za.co.sindi.ai.anthropic.models.CountMessageTokens;
 import za.co.sindi.ai.anthropic.models.Message;
 import za.co.sindi.ai.anthropic.models.MessageInput;
+import za.co.sindi.ai.anthropic.models.event.Event;
 
 /**
  * @author Buhake Sindi
@@ -68,6 +70,28 @@ public class ClaudeAI implements AnthropicAI {
 	}
 
 	/* (non-Javadoc)
+	 * @see za.co.sindi.ai.anthropic.AnthropicAI#streamCreateMessage(za.co.sindi.ai.anthropic.models.MessageInput)
+	 */
+	@Override
+	public Stream<Event> streamCreateMessage(MessageInput input) throws IOException, InterruptedException {
+		// TODO Auto-generated method stub
+		input.setStream(true);
+		CreateMessageRequest request = new CreateMessageRequest(BASE_URL + "/messages", input);
+		return apiClient.sendStreaming(request);
+	}
+
+	/* (non-Javadoc)
+	 * @see za.co.sindi.ai.anthropic.AnthropicAI#streamCreateMessageAsync(za.co.sindi.ai.anthropic.models.MessageInput)
+	 */
+	@Override
+	public CompletableFuture<Stream<Event>> streamCreateMessageAsync(MessageInput input) {
+		// TODO Auto-generated method stub
+		input.setStream(true);
+		CreateMessageRequest request = new CreateMessageRequest(BASE_URL + "/messages", input);
+		return apiClient.sendStreamingAsync(request);
+	}
+
+	/* (non-Javadoc)
 	 * @see za.co.sindi.ai.anthropic.AnthropicAI#countMessageTokens(za.co.sindi.ai.anthropic.models.MessageInput)
 	 */
 	@Override
@@ -98,5 +122,27 @@ public class ClaudeAI implements AnthropicAI {
 		// TODO Auto-generated method stub
 		CreateCompletionRequest request = new CreateCompletionRequest(BASE_URL + "/complete", prompt);
 		return apiClient.sendAsync(request, Completion.class);
+	}
+
+	/* (non-Javadoc)
+	 * @see za.co.sindi.ai.anthropic.AnthropicAI#streamCreateTextCompletion(za.co.sindi.ai.anthropic.models.CompletionPrompt)
+	 */
+	@Override
+	public Stream<Event> streamCreateTextCompletion(CompletionPrompt prompt) throws IOException, InterruptedException {
+		// TODO Auto-generated method stub
+		prompt.setStream(true);
+		CreateCompletionRequest request = new CreateCompletionRequest(BASE_URL + "/complete", prompt);
+		return apiClient.sendStreaming(request);
+	}
+
+	/* (non-Javadoc)
+	 * @see za.co.sindi.ai.anthropic.AnthropicAI#streamCreateTextCompletionAsync(za.co.sindi.ai.anthropic.models.CompletionPrompt)
+	 */
+	@Override
+	public CompletableFuture<Stream<Event>> streamCreateTextCompletionAsync(CompletionPrompt prompt) {
+		// TODO Auto-generated method stub
+		prompt.setStream(true);
+		CreateCompletionRequest request = new CreateCompletionRequest(BASE_URL + "/complete", prompt);
+		return apiClient.sendStreamingAsync(request);
 	}
 }

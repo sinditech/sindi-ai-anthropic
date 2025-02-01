@@ -13,12 +13,22 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
+import java.util.stream.Stream;
 
 import za.co.sindi.ai.anthropic.implementation.JSONObjectTransformerImpl;
 import za.co.sindi.ai.anthropic.models.ErrorResponse;
+import za.co.sindi.commons.net.http.WithErrorBodyHandler;
+import za.co.sindi.commons.net.sse.AllEventSubscriber;
+import za.co.sindi.commons.net.sse.Event;
+import za.co.sindi.commons.net.sse.MessageEvent;
+import za.co.sindi.commons.net.sse.SSEEventProcessor;
+import za.co.sindi.commons.util.Either;
 
 /**
  * @author Buhake Sindi
@@ -91,9 +101,9 @@ public class AnthropicAPIClient implements APIClient {
 		// TODO Auto-generated method stub
 		HttpRequest httpRequest = createHttpRequestBuilder(apiRequest).build();
 		HttpClient httpClient = createHttpClient();
-		HttpResponse<String> httpResponse = httpClient.send(httpRequest, BodyHandlers.ofString());
+		HttpResponse<Either<String, String>> httpResponse = httpClient.send(httpRequest,  new WithErrorBodyHandler<>(BodyHandlers.ofString()));
 		validateHttpResponse(httpResponse);
-		return objectTransformer.transform(httpResponse.body(), responseType);
+		return objectTransformer.transform(httpResponse.body().getLeft(), responseType);
 	}
 
 	@Override
@@ -101,13 +111,45 @@ public class AnthropicAPIClient implements APIClient {
 		// TODO Auto-generated method stub
 		HttpRequest httpRequest = createHttpRequestBuilder(apiRequest).build();
 		HttpClient httpClient = createHttpClient();
-		CompletableFuture<HttpResponse<String>> httpResponseAsync = httpClient.sendAsync(httpRequest, BodyHandlers.ofString());
+		CompletableFuture<HttpResponse<Either<String, String>>> httpResponseAsync = httpClient.sendAsync(httpRequest,  new WithErrorBodyHandler<>(BodyHandlers.ofString()));
 		return httpResponseAsync.thenApplyAsync(httpResponse -> {
 			validateHttpResponse(httpResponse);
-			return objectTransformer.transform(httpResponse.body(), responseType);
+			return objectTransformer.transform(httpResponse.body().getLeft(), responseType);
 		}).toCompletableFuture();
 	}
 	
+	/* (non-Javadoc)
+	 * @see za.co.sindi.ai.anthropic.APIClient#sendStreaming(za.co.sindi.ai.anthropic.APIRequest)
+	 */
+	@Override
+	public <REQ> Stream<za.co.sindi.ai.anthropic.models.event.Event> sendStreaming(APIRequest<REQ> apiRequest) throws IOException, InterruptedException {
+		// TODO Auto-generated method stub
+		SSEEventProcessor processor = new SSEEventProcessor();
+		AllEventSubscriber subscriber = new AllEventSubscriber();
+		HttpRequest httpRequest = createHttpRequestBuilder(apiRequest).build();
+		HttpClient httpClient = createHttpClient();
+		HttpResponse<Either<Void, String>> httpResponse = httpClient.send(httpRequest, new WithErrorBodyHandler<>(BodyHandlers.fromLineSubscriber(processor)));
+		validateHttpResponse(httpResponse);
+		return handleStream(subscriber.getEventStream());
+	}
+
+	/* (non-Javadoc)
+	 * @see za.co.sindi.ai.anthropic.APIClient#sendStreamingAsync(za.co.sindi.ai.anthropic.APIRequest)
+	 */
+	@Override
+	public <REQ> CompletableFuture<Stream<za.co.sindi.ai.anthropic.models.event.Event>> sendStreamingAsync(APIRequest<REQ> apiRequest) {
+		// TODO Auto-generated method stub
+		SSEEventProcessor processor = new SSEEventProcessor();
+		AllEventSubscriber subscriber = new AllEventSubscriber();
+		HttpRequest httpRequest = createHttpRequestBuilder(apiRequest).build();
+		HttpClient httpClient = createHttpClient();
+		CompletableFuture<HttpResponse<Either<Void, String>>> httpResponseAsync = httpClient.sendAsync(httpRequest, new WithErrorBodyHandler<>(BodyHandlers.fromLineSubscriber(processor)));
+		return httpResponseAsync.thenApplyAsync(httpResponse -> {
+			validateHttpResponse(httpResponse);
+			return handleStream(subscriber.getEventStream());
+		}).toCompletableFuture();
+	}
+
 	private <REQ> HttpRequest.Builder createHttpRequestBuilder(final APIRequest<REQ> request) {
 		HttpRequest.Builder builder = HttpRequest.newBuilder(URI.create(request.getUri()))
 						  .header("Content-Type", "application/json")
@@ -138,11 +180,25 @@ public class AnthropicAPIClient implements APIClient {
 		return httpClientBuilder.build();
 	}
 	
-	private void validateHttpResponse(final HttpResponse<String> httpResponse) {
-		int code = httpResponse.statusCode() / 100;
-		if (code == 4 || code == 5) {
-			ErrorResponse httpError = objectTransformer.transform(httpResponse.body(), ErrorResponse.class);
+	private <R> void validateHttpResponse(final HttpResponse<Either<R, String>> httpResponse) {
+		Either<R, String> either = httpResponse.body();
+		if (either.isRightPresent()) {
+			ErrorResponse httpError = objectTransformer.transform(either.getRight(), ErrorResponse.class);
 			throw new AnthropicAIException(httpError.getError());
 		}
+	}
+	
+	protected Stream<za.co.sindi.ai.anthropic.models.event.Event> handleStream(final Stream<Event> events) {
+		List<za.co.sindi.ai.anthropic.models.event.Event> result = new ArrayList<>();
+		events.forEach(event -> {
+			if (event instanceof MessageEvent message) {
+				String content = message.getData();
+				if (!"[DONE]".equals(content)) {
+					result.add(objectTransformer.transform(content, za.co.sindi.ai.anthropic.models.event.Event.class));
+				}
+			}
+		});
+		
+		return Collections.unmodifiableList(result).stream();
 	}
 }

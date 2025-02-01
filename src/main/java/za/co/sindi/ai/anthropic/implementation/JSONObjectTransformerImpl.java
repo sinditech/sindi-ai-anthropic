@@ -17,7 +17,7 @@ public class JSONObjectTransformerImpl implements JSONObjectTransformer {
 	
 	private JsonbConfig newJsonbConfig() {
 		JsonbConfig config = new JsonbConfig();
-		config.withAdapters(new JsonbCacheControlTypeAdapter(), new JsonbDocumentMediaTypeAdapter(), new JsonbImageMediaTypeAdapter(), new JsonObjectJsonbAdapter());
+		config.withAdapters(new JsonbCacheControlTypeAdapter(), new JsonbMediaTypeAdapter(), new JsonObjectJsonbAdapter());
 		return config;
 	}
 

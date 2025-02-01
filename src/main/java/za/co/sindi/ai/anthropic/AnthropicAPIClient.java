@@ -153,7 +153,7 @@ public class AnthropicAPIClient implements APIClient {
 	private <REQ> HttpRequest.Builder createHttpRequestBuilder(final APIRequest<REQ> request) {
 		HttpRequest.Builder builder = HttpRequest.newBuilder(URI.create(request.getUri()))
 						  .header("Content-Type", "application/json")
-						  .header("Accept", "application/json")
+//						  .header("Accept", "application/json")
 						  .header("x-api-key", apiKey)
 						  .header("anthropic-version", anthropicVersion)
 						  .POST(BodyPublishers.ofString(objectTransformer.transform(request.getRequestBody()), StandardCharsets.UTF_8));

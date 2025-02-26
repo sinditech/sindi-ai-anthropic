@@ -32,7 +32,7 @@ public class Message implements Serializable {
 	private String model;
 	
 	@JsonbProperty("stop_reason")
-	private String stopReason;
+	private StopReason stopReason;
 	
 	@JsonbProperty("stop_sequence")
 	private String stopSequence;
@@ -113,14 +113,14 @@ public class Message implements Serializable {
 	/**
 	 * @return the stopReason
 	 */
-	public String getStopReason() {
+	public StopReason getStopReason() {
 		return stopReason;
 	}
 
 	/**
 	 * @param stopReason the stopReason to set
 	 */
-	public void setStopReason(String stopReason) {
+	public void setStopReason(StopReason stopReason) {
 		this.stopReason = stopReason;
 	}
 

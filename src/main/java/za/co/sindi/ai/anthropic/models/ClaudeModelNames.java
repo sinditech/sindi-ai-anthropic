@@ -9,7 +9,10 @@ package za.co.sindi.ai.anthropic.models;
  * @see <a href="https://docs.anthropic.com/en/docs/about-claude/models">Model names</a>
  */
 public enum ClaudeModelNames {
-	CLAUDE_3_5_SONNET_20240620("claude-3-5-sonnet-20240620")
+	CLAUDE_3_7_SONNET_20240620("claude-3-7-sonnet-20250219")
+	,CLAUDE_3_7_SONNET_LATEST("claude-3-7-sonnet-latest")
+	,CLAUDE_3_5_HAIKU_20241022("claude-3-5-haiku-20241022")
+	,CLAUDE_3_5_SONNET_20240620("claude-3-5-sonnet-20240620")
 	,CLAUDE_3_5_SONNET_20241022("claude-3-5-sonnet-20241022")
 	,CLAUDE_3_5_SONNET_LATEST("claude-3-5-sonnet-latest")
 	,CLAUDE_3_OPUS("claude-3-opus-20240229")
@@ -22,6 +25,8 @@ public enum ClaudeModelNames {
 	,@Deprecated CLAUDE_2_0("claude-2.0")
 	,@Deprecated CLAUDE_INSTANT_1_2("claude-instant-1.2")
 	;
+	public static final ClaudeModelNames CLAUDE_3_5_SONNET_V2 = CLAUDE_3_5_SONNET_LATEST;
+	
 	private final String modelName;
 
 	/**
@@ -45,6 +50,6 @@ public enum ClaudeModelNames {
 	}
 	
 	public static ClaudeModelNames getLatest() {
-		return CLAUDE_3_5_SONNET_20241022;
+		return CLAUDE_3_7_SONNET_LATEST;
 	}
 }

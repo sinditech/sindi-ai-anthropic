@@ -4,7 +4,6 @@
 package za.co.sindi.ai.anthropic.completions;
 
 import za.co.sindi.ai.anthropic.BaseAPIRequest;
-import za.co.sindi.ai.anthropic.models.CompletionPrompt;
 
 /**
  * @author Buhake Sindi

@@ -5,6 +5,7 @@ package za.co.sindi.ai.anthropic;
 
 import java.io.IOException;
 import java.net.ProxySelector;
+import java.net.URI;
 import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
@@ -35,6 +36,8 @@ public interface APIClient {
 	
 	public void setObjectTransformer(final JSONObjectTransformer objectTransformer);
 
+	public <REQ, RES> RES get(final URI uri, Class<RES> responseType) throws IOException, InterruptedException;
+	public <REQ, RES> CompletableFuture<RES> getAsync(final URI uri, Class<RES> responseType);
 	public <REQ, RES> RES send(final APIRequest<REQ> apiRequest, Class<RES> responseType) throws IOException, InterruptedException;
 	public <REQ, RES> CompletableFuture<RES> sendAsync(final APIRequest<REQ> apiRequest, Class<RES> responseType);
 	public <REQ> Stream<Event> sendStreaming(final APIRequest<REQ> apiRequest) throws IOException, InterruptedException;

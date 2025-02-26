@@ -4,6 +4,7 @@
 package za.co.sindi.ai.anthropic.implementation;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
@@ -11,16 +12,20 @@ import java.util.stream.Stream;
 import za.co.sindi.ai.anthropic.APIClient;
 import za.co.sindi.ai.anthropic.AnthropicAI;
 import za.co.sindi.ai.anthropic.AnthropicAPIClient;
+import za.co.sindi.ai.anthropic.completions.CompletionPrompt;
 import za.co.sindi.ai.anthropic.completions.CreateCompletionRequest;
+import za.co.sindi.ai.anthropic.messages.CountMessage;
+import za.co.sindi.ai.anthropic.messages.CountMessageTokens;
 import za.co.sindi.ai.anthropic.messages.CountMessageTokensRequest;
 import za.co.sindi.ai.anthropic.messages.CreateMessageRequest;
+import za.co.sindi.ai.anthropic.messages.MessageInput;
 import za.co.sindi.ai.anthropic.models.Completion;
-import za.co.sindi.ai.anthropic.models.CompletionPrompt;
-import za.co.sindi.ai.anthropic.models.CountMessage;
-import za.co.sindi.ai.anthropic.models.CountMessageTokens;
 import za.co.sindi.ai.anthropic.models.Message;
-import za.co.sindi.ai.anthropic.models.MessageInput;
+import za.co.sindi.ai.anthropic.models.Model;
+import za.co.sindi.ai.anthropic.models.ModelList;
 import za.co.sindi.ai.anthropic.models.event.Event;
+import za.co.sindi.commons.net.URIBuilder;
+import za.co.sindi.commons.utils.Strings;
 
 /**
  * @author Buhake Sindi
@@ -144,5 +149,61 @@ public class ClaudeAI implements AnthropicAI {
 		prompt.setStream(true);
 		CreateCompletionRequest request = new CreateCompletionRequest(BASE_URL + "/complete", prompt);
 		return apiClient.sendStreamingAsync(request);
+	}
+
+	/* (non-Javadoc)
+	 * @see za.co.sindi.ai.anthropic.AnthropicAI#getModel(java.lang.String)
+	 */
+	@Override
+	public Model getModel(String modelId) throws IOException, InterruptedException {
+		// TODO Auto-generated method stub
+		return apiClient.get(URI.create(BASE_URL + "/" + modelId), Model.class);
+	}
+
+	/* (non-Javadoc)
+	 * @see za.co.sindi.ai.anthropic.AnthropicAI#getModelList(java.lang.String, java.lang.String, java.lang.Integer)
+	 */
+	@Override
+	public ModelList getModelList(String beforeId, String afterId, Integer limit) throws IOException, InterruptedException {
+		// TODO Auto-generated method stub
+		URIBuilder builder = new URIBuilder(URI.create(BASE_URL + "/models"));
+		if (!Strings.isNullOrEmpty(beforeId)) {
+			builder.addQueryParameters("before_id", beforeId);
+		}
+		if (!Strings.isNullOrEmpty(afterId)) {
+			builder.addQueryParameters("after_id", afterId);
+		}
+		if (limit != null) {
+			builder.addQueryParameters("limit", String.valueOf(limit));
+		}
+		return apiClient.get(builder.build(), ModelList.class);
+	}
+
+	/* (non-Javadoc)
+	 * @see za.co.sindi.ai.anthropic.AnthropicAI#getModelAsync(java.lang.String)
+	 */
+	@Override
+	public CompletableFuture<Model> getModelAsync(String modelId) {
+		// TODO Auto-generated method stub
+		return apiClient.getAsync(URI.create(BASE_URL + "/" + modelId), Model.class);
+	}
+
+	/* (non-Javadoc)
+	 * @see za.co.sindi.ai.anthropic.AnthropicAI#getModelListAsync(java.lang.String, java.lang.String, java.lang.Integer)
+	 */
+	@Override
+	public CompletableFuture<ModelList> getModelListAsync(String beforeId, String afterId, Integer limit) {
+		// TODO Auto-generated method stub
+		URIBuilder builder = new URIBuilder(URI.create(BASE_URL + "/models"));
+		if (!Strings.isNullOrEmpty(beforeId)) {
+			builder.addQueryParameters("before_id", beforeId);
+		}
+		if (!Strings.isNullOrEmpty(afterId)) {
+			builder.addQueryParameters("after_id", afterId);
+		}
+		if (limit != null) {
+			builder.addQueryParameters("limit", String.valueOf(limit));
+		}
+		return apiClient.getAsync(builder.build(), ModelList.class);
 	}
 }

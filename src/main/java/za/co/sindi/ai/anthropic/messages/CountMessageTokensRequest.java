@@ -6,7 +6,6 @@ package za.co.sindi.ai.anthropic.messages;
 import java.util.List;
 
 import za.co.sindi.ai.anthropic.BaseAPIRequest;
-import za.co.sindi.ai.anthropic.models.CountMessage;
 import za.co.sindi.ai.anthropic.models.InputMessage;
 
 /**

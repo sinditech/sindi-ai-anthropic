@@ -1,13 +1,18 @@
 /**
  * 
  */
-package za.co.sindi.ai.anthropic.models;
+package za.co.sindi.ai.anthropic.messages;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 import jakarta.json.bind.annotation.JsonbProperty;
+import za.co.sindi.ai.anthropic.models.InputMessage;
+import za.co.sindi.ai.anthropic.models.Metadata;
+import za.co.sindi.ai.anthropic.models.Thinking;
+import za.co.sindi.ai.anthropic.models.Tool;
+import za.co.sindi.ai.anthropic.models.ToolChoice;
 
 /**
  * Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.
@@ -41,6 +46,9 @@ public class MessageInput implements Serializable {
 	
 	@JsonbProperty
 	private Double temperature;
+	
+	@JsonbProperty
+	private Thinking thinking;
 	
 	@JsonbProperty("tool_choice")
 	private ToolChoice toolChoice;
@@ -148,6 +156,20 @@ public class MessageInput implements Serializable {
 	 */
 	public void setTemperature(Double temperature) {
 		this.temperature = temperature;
+	}
+
+	/**
+	 * @return the thinking
+	 */
+	public Thinking getThinking() {
+		return thinking;
+	}
+
+	/**
+	 * @param thinking the thinking to set
+	 */
+	public void setThinking(Thinking thinking) {
+		this.thinking = thinking;
 	}
 
 	/**

@@ -1,12 +1,13 @@
 /**
  * 
  */
-package za.co.sindi.ai.anthropic.models;
+package za.co.sindi.ai.anthropic.completions;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 import jakarta.json.bind.annotation.JsonbProperty;
+import za.co.sindi.ai.anthropic.models.Metadata;
 
 /**
  * Send a structured list of input messages with text and/or image content, and the model will generate the next message in the conversation.

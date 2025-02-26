@@ -7,7 +7,6 @@ import java.util.List;
 
 import za.co.sindi.ai.anthropic.BaseAPIRequest;
 import za.co.sindi.ai.anthropic.models.InputMessage;
-import za.co.sindi.ai.anthropic.models.MessageInput;
 
 /**
  * @author Buhake Sindi

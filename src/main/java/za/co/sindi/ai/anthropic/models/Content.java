@@ -21,6 +21,8 @@ import jakarta.json.bind.annotation.JsonbTypeInfo;
 	    @JsonbSubtype(alias="tool_use", type=ToolUseContent.class),
 	    @JsonbSubtype(alias="tool_result", type=ToolResultContent.class),
 	    @JsonbSubtype(alias="document", type=DocumentContent.class),
+	    @JsonbSubtype(alias="thinking", type=ThinkingContent.class),
+	    @JsonbSubtype(alias="redacted_thinking", type=RedactedThinkingContent.class),
 	}
 )
 public abstract class Content implements Serializable {

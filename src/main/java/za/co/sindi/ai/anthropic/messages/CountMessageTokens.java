@@ -1,7 +1,7 @@
 /**
  * 
  */
-package za.co.sindi.ai.anthropic.models;
+package za.co.sindi.ai.anthropic.messages;
 
 import java.io.Serializable;
 

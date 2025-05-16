@@ -9,11 +9,11 @@ import java.util.List;
 
 import za.co.sindi.ai.anthropic.AnthropicAI;
 import za.co.sindi.ai.anthropic.implementation.ClaudeAI;
+import za.co.sindi.ai.anthropic.messages.MessageInput;
 import za.co.sindi.ai.anthropic.models.ClaudeModelNames;
 import za.co.sindi.ai.anthropic.models.InputMessage;
 import za.co.sindi.ai.anthropic.models.InputStringMessage;
 import za.co.sindi.ai.anthropic.models.Message;
-import za.co.sindi.ai.anthropic.models.MessageInput;
 import za.co.sindi.ai.anthropic.models.TextContent;
 
 /**

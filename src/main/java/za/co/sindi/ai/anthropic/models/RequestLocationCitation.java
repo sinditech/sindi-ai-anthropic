@@ -15,7 +15,8 @@ import jakarta.json.bind.annotation.JsonbTypeInfo;
 	value = {
 		@JsonbSubtype(alias="char_location", type=RequestCharLocationCitation.class),
 	    @JsonbSubtype(alias="page_location", type=RequestPageLocationCitation.class),
-		@JsonbSubtype(alias="content_block_location", type=RequestContentBlockLocationCitation.class)
+		@JsonbSubtype(alias="content_block_location", type=RequestContentBlockLocationCitation.class),
+		@JsonbSubtype(alias="web_search_result_location", type=RequestWebSearchResultLocationCitation.class)
 	}
 )
 public abstract class RequestLocationCitation implements Serializable {
@@ -23,12 +24,6 @@ public abstract class RequestLocationCitation implements Serializable {
 	@JsonbProperty("cited_text")
 	private String citedText;
 	
-	@JsonbProperty("document_index")
-	private int documentIndex;
-	
-	@JsonbProperty("document_title")
-	private String documentTitle;
-
 	/**
 	 * @return the citedText
 	 */
@@ -41,33 +36,5 @@ public abstract class RequestLocationCitation implements Serializable {
 	 */
 	public void setCitedText(String citedText) {
 		this.citedText = citedText;
-	}
-
-	/**
-	 * @return the documentIndex
-	 */
-	public int getDocumentIndex() {
-		return documentIndex;
-	}
-
-	/**
-	 * @param documentIndex the documentIndex to set
-	 */
-	public void setDocumentIndex(int documentIndex) {
-		this.documentIndex = documentIndex;
-	}
-
-	/**
-	 * @return the documentTitle
-	 */
-	public String getDocumentTitle() {
-		return documentTitle;
-	}
-
-	/**
-	 * @param documentTitle the documentTitle to set
-	 */
-	public void setDocumentTitle(String documentTitle) {
-		this.documentTitle = documentTitle;
 	}
 }

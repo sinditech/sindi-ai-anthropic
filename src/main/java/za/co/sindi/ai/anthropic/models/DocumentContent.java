@@ -9,10 +9,10 @@ import jakarta.json.bind.annotation.JsonbProperty;
  * @author Buhake Sindi
  * @since 16 March 2024
  */
-public class DocumentContent extends Content {
+public class DocumentContent extends CacheControlContent {
 
 	@JsonbProperty
-	private DataContentSource source;
+	private ContentSource source;
 	
 	@JsonbProperty
 	private String context;
@@ -26,14 +26,14 @@ public class DocumentContent extends Content {
 	/**
 	 * @return the source
 	 */
-	public DataContentSource getSource() {
+	public ContentSource getSource() {
 		return source;
 	}
 
 	/**
 	 * @param source the source to set
 	 */
-	public void setSource(DataContentSource source) {
+	public void setSource(ContentSource source) {
 		this.source = source;
 	}
 

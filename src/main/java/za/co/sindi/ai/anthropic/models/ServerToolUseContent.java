@@ -10,13 +10,13 @@ import jakarta.json.bind.annotation.JsonbProperty;
  * @author Buhake Sindi
  * @since 16 March 2024
  */
-public class ToolUseContent extends CacheControlContent {
+public class ServerToolUseContent extends CacheControlContent {
 
 	@JsonbProperty
 	private String id;
 	
 	@JsonbProperty
-	private String name;
+	private String name = "web_search";
 	
 	@JsonbProperty
 	private JsonObject input;

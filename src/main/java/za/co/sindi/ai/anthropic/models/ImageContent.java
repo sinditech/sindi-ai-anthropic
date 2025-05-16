@@ -9,23 +9,22 @@ import jakarta.json.bind.annotation.JsonbProperty;
  * @author Buhake Sindi
  * @since 16 March 2024
  */
-public class ImageContent extends Content {
+public class ImageContent extends CacheControlContent {
 
 	@JsonbProperty
-	private Base64DataContentSource source;
-
-	/**
-	 * @param source
-	 */
-	public ImageContent(final Base64DataContentSource source) {
-		super();
-		this.source = source;
-	}
+	private ContentSource source;
 
 	/**
 	 * @return the source
 	 */
-	public Base64DataContentSource getSource() {
+	public ContentSource getSource() {
 		return source;
+	}
+
+	/**
+	 * @param source the source to set
+	 */
+	public void setSource(ContentSource source) {
+		this.source = source;
 	}
 }

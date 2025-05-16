@@ -11,16 +11,16 @@ import jakarta.json.bind.annotation.JsonbProperty;
  * @author Buhake Sindi
  * @since 16 March 2024
  */
-public class ToolResultContent extends Content {
+public class ToolResultContent extends CacheControlContent {
 
 	@JsonbProperty("tool_use_id")
 	private String toolUseId;
 	
-	@JsonbProperty
+	@JsonbProperty("is_error")
 	private Boolean error;
 	
 	@JsonbProperty
-	private String content;
+	private Object content;
 
 	/**
 	 * 
@@ -69,14 +69,25 @@ public class ToolResultContent extends Content {
 	/**
 	 * @return the content
 	 */
-	public String getContent() {
-		return content;
+	public Object getContent() {
+		if (content == null) return null;
+		if (content instanceof String) return (String)content;
+		if (content instanceof Content[]) return (Content[]) content;
+		
+		throw new IllegalStateException("Invalid content.");
 	}
 
 	/**
 	 * @param content the content to set
 	 */
 	public void setContent(String content) {
+		this.content = content;
+	}
+	
+	/**
+	 * @param content the content to set
+	 */
+	public void setContent(Content[] content) {
 		this.content = content;
 	}
 }

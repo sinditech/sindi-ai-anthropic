@@ -9,7 +9,7 @@ import jakarta.json.bind.annotation.JsonbProperty;
  * @author Buhake Sindi
  * @since 16 March 2024
  */
-public class TextContent extends Content {
+public class TextContent extends CacheControlContent {
 
 	@JsonbProperty
 	private String text;

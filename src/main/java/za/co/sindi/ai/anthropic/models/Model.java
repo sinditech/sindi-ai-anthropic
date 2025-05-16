@@ -4,7 +4,6 @@
 package za.co.sindi.ai.anthropic.models;
 
 import java.io.Serializable;
-import java.util.List;
 
 import jakarta.json.bind.annotation.JsonbProperty;
 

@@ -23,7 +23,15 @@ import za.co.sindi.ai.anthropic.models.Completion;
 import za.co.sindi.ai.anthropic.models.Message;
 import za.co.sindi.ai.anthropic.models.Model;
 import za.co.sindi.ai.anthropic.models.ModelList;
+import za.co.sindi.ai.anthropic.models.Prompt;
+import za.co.sindi.ai.anthropic.models.TemplatePrompt;
 import za.co.sindi.ai.anthropic.models.event.Event;
+import za.co.sindi.ai.anthropic.prompts.GeneratePromptRequest;
+import za.co.sindi.ai.anthropic.prompts.ImprovePromptInput;
+import za.co.sindi.ai.anthropic.prompts.ImprovePromptRequest;
+import za.co.sindi.ai.anthropic.prompts.PromptInput;
+import za.co.sindi.ai.anthropic.prompts.TemplatePromptInput;
+import za.co.sindi.ai.anthropic.prompts.TemplatePromptRequest;
 import za.co.sindi.commons.net.URIBuilder;
 import za.co.sindi.commons.utils.Strings;
 
@@ -205,5 +213,47 @@ public class ClaudeAI implements AnthropicAI {
 			builder.addQueryParameters("limit", String.valueOf(limit));
 		}
 		return apiClient.getAsync(builder.build(), ModelList.class);
+	}
+
+	@Override
+	public Prompt generateAPrompt(PromptInput input) throws IOException, InterruptedException {
+		// TODO Auto-generated method stub
+		GeneratePromptRequest request = new GeneratePromptRequest(BASE_URL + "/v1/experimental/generate_prompt", input);
+		return apiClient.send(request, Prompt.class);
+	}
+
+	@Override
+	public CompletableFuture<Prompt> generateAPromptAsync(PromptInput input) {
+		// TODO Auto-generated method stub
+		GeneratePromptRequest request = new GeneratePromptRequest(BASE_URL + "/v1/experimental/generate_prompt", input);
+		return apiClient.sendAsync(request, Prompt.class);
+	}
+
+	@Override
+	public Prompt improvePrompt(ImprovePromptInput input) throws IOException, InterruptedException {
+		// TODO Auto-generated method stub
+		ImprovePromptRequest request = new ImprovePromptRequest(BASE_URL + "/v1/experimental/improve_prompt", input);
+		return apiClient.send(request, Prompt.class);
+	}
+
+	@Override
+	public CompletableFuture<Prompt> improvePromptAsync(ImprovePromptInput input) {
+		// TODO Auto-generated method stub
+		ImprovePromptRequest request = new ImprovePromptRequest(BASE_URL + "/v1/experimental/improve_prompt", input);
+		return apiClient.sendAsync(request, Prompt.class);
+	}
+
+	@Override
+	public TemplatePrompt templatizeAPrompt(TemplatePromptInput input) throws IOException, InterruptedException {
+		// TODO Auto-generated method stub
+		TemplatePromptRequest request = new TemplatePromptRequest(BASE_URL + "/v1/experimental/templatize_prompt", input);
+		return apiClient.send(request, TemplatePrompt.class);
+	}
+
+	@Override
+	public CompletableFuture<TemplatePrompt> templatizeAPromptAsync(TemplatePromptInput input) {
+		// TODO Auto-generated method stub
+		TemplatePromptRequest request = new TemplatePromptRequest(BASE_URL + "/v1/experimental/templatize_prompt", input);
+		return apiClient.sendAsync(request, TemplatePrompt.class);
 	}
 }

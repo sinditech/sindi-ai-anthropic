@@ -6,19 +6,19 @@ import jakarta.json.bind.annotation.JsonbProperty;
  * @author Buhake Sindi
  * @since 01 February 2024
  */
-public class RequestContentBlockLocationCitation extends RequestLocationCitation {
+public class PageLocationCitation extends LocationCitation {
 	
 	@JsonbProperty("document_index")
 	private int documentIndex;
 	
 	@JsonbProperty("document_title")
 	private String documentTitle;
+
+	@JsonbProperty("end_page_number")
+	private int endPageNumber;
 	
-	@JsonbProperty("end_block_index")
-	private int endBlockIndex;
-	
-	@JsonbProperty("start_block_index")
-	private int startBlockIndex;
+	@JsonbProperty("start_page_number")
+	private int startPageNumber;
 
 	/**
 	 * @return the documentIndex
@@ -49,30 +49,30 @@ public class RequestContentBlockLocationCitation extends RequestLocationCitation
 	}
 
 	/**
-	 * @return the endBlockIndex
+	 * @return the endPageNumber
 	 */
-	public int getEndBlockIndex() {
-		return endBlockIndex;
+	public int getEndPageNumber() {
+		return endPageNumber;
 	}
 
 	/**
-	 * @param endBlockIndex the endBlockIndex to set
+	 * @param endPageNumber the endPageNumber to set
 	 */
-	public void setEndBlockIndex(int endBlockIndex) {
-		this.endBlockIndex = endBlockIndex;
+	public void setEndPageNumber(int endPageNumber) {
+		this.endPageNumber = endPageNumber;
 	}
 
 	/**
-	 * @return the startBlockIndex
+	 * @return the startPageNumber
 	 */
-	public int getStartBlockIndex() {
-		return startBlockIndex;
+	public int getStartPageNumber() {
+		return startPageNumber;
 	}
 
 	/**
-	 * @param startBlockIndex the startBlockIndex to set
+	 * @param startPageNumber the startPageNumber to set
 	 */
-	public void setStartBlockIndex(int startBlockIndex) {
-		this.startBlockIndex = startBlockIndex;
+	public void setStartPageNumber(int startPageNumber) {
+		this.startPageNumber = startPageNumber;
 	}
 }

@@ -39,6 +39,9 @@ public class Message implements Serializable {
 	
 	@JsonbProperty
 	private Usage usage;
+	
+	@JsonbProperty
+	private Container container;
 
 	/**
 	 * @return the id
@@ -150,5 +153,19 @@ public class Message implements Serializable {
 	 */
 	public void setUsage(Usage usage) {
 		this.usage = usage;
+	}
+
+	/**
+	 * @return the container
+	 */
+	public Container getContainer() {
+		return container;
+	}
+
+	/**
+	 * @param container the container to set
+	 */
+	public void setContainer(Container container) {
+		this.container = container;
 	}
 }

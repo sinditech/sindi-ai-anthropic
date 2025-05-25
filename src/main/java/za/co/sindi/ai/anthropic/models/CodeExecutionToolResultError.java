@@ -9,7 +9,7 @@ import jakarta.json.bind.annotation.JsonbProperty;
  * @author Buhake Sindi
  * @since 16 May 2025
  */
-public class WebSearchToolResultError extends WebSearchResultContent {
+public class CodeExecutionToolResultError extends CodeExecutionResultContent {
 
 	@JsonbProperty("error_code")
 	private ToolResultErrorCode errorCode;

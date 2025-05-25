@@ -19,12 +19,13 @@ import jakarta.json.bind.annotation.JsonbTypeInfo;
 	value = {
 	    @JsonbSubtype(alias="invalid_request_error", type=InvalidRequestError.class),
 	    @JsonbSubtype(alias="authentication_error", type=AuthenticationError.class),
+	    @JsonbSubtype(alias="billing_error", type=BillingError.class),
 	    @JsonbSubtype(alias="permission_error", type=PermissionError.class),
 	    @JsonbSubtype(alias="not_found_error", type=NotFoundError.class),
-	    @JsonbSubtype(alias="permission_error", type=PermissionError.class),
 	    @JsonbSubtype(alias="request_too_large", type=RequestTooLargeError.class),
 	    @JsonbSubtype(alias="rate_limit_error", type=RateLimitError.class),
 	    @JsonbSubtype(alias="api_error", type=APIError.class),
+	    @JsonbSubtype(alias="timeout_error", type=GatewayTimeoutError.class),
 	    @JsonbSubtype(alias="overloaded_error", type=OverloadedError.class),
 	}
 )

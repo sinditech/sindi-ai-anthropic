@@ -6,7 +6,7 @@ import jakarta.json.bind.annotation.JsonbProperty;
  * @author Buhake Sindi
  * @since 01 February 2024
  */
-public class RequestCharLocationCitation extends RequestLocationCitation {
+public class CharLocationCitation extends LocationCitation {
 	
 	@JsonbProperty("document_index")
 	private int documentIndex;

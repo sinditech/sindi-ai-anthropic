@@ -15,7 +15,12 @@ import za.co.sindi.ai.anthropic.models.Completion;
 import za.co.sindi.ai.anthropic.models.Message;
 import za.co.sindi.ai.anthropic.models.Model;
 import za.co.sindi.ai.anthropic.models.ModelList;
+import za.co.sindi.ai.anthropic.models.Prompt;
+import za.co.sindi.ai.anthropic.models.TemplatePrompt;
 import za.co.sindi.ai.anthropic.models.event.Event;
+import za.co.sindi.ai.anthropic.prompts.ImprovePromptInput;
+import za.co.sindi.ai.anthropic.prompts.PromptInput;
+import za.co.sindi.ai.anthropic.prompts.TemplatePromptInput;
 
 /**
  * @author Buhake Sindi
@@ -45,4 +50,11 @@ public interface AnthropicAI {
 		return getModelListAsync(null, null, null);
 	}
 	public CompletableFuture<ModelList> getModelListAsync(final String beforeId, final String afterId, final Integer limit);
+	
+	public Prompt generateAPrompt(final PromptInput input) throws IOException, InterruptedException;
+	public CompletableFuture<Prompt> generateAPromptAsync(final PromptInput input);
+	public Prompt improvePrompt(final ImprovePromptInput input) throws IOException, InterruptedException;
+	public CompletableFuture<Prompt> improvePromptAsync(final ImprovePromptInput input);
+	public TemplatePrompt templatizeAPrompt(final TemplatePromptInput input) throws IOException, InterruptedException;
+	public CompletableFuture<TemplatePrompt> templatizeAPromptAsync(final TemplatePromptInput input);
 }

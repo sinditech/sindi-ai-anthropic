@@ -13,13 +13,13 @@ import jakarta.json.bind.annotation.JsonbTypeInfo;
 @JsonbTypeInfo(
 	key = "type",
 	value = {
-		@JsonbSubtype(alias="char_location", type=RequestCharLocationCitation.class),
-	    @JsonbSubtype(alias="page_location", type=RequestPageLocationCitation.class),
-		@JsonbSubtype(alias="content_block_location", type=RequestContentBlockLocationCitation.class),
-		@JsonbSubtype(alias="web_search_result_location", type=RequestWebSearchResultLocationCitation.class)
+		@JsonbSubtype(alias="char_location", type=CharLocationCitation.class),
+	    @JsonbSubtype(alias="page_location", type=PageLocationCitation.class),
+		@JsonbSubtype(alias="content_block_location", type=ContentBlockLocationCitation.class),
+		@JsonbSubtype(alias="web_search_result_location", type=WebSearchResultLocationCitation.class)
 	}
 )
-public abstract class RequestLocationCitation implements Serializable {
+public abstract class LocationCitation implements Serializable {
 
 	@JsonbProperty("cited_text")
 	private String citedText;

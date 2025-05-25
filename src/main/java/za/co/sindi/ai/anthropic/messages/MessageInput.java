@@ -9,7 +9,9 @@ import java.util.Objects;
 
 import jakarta.json.bind.annotation.JsonbProperty;
 import za.co.sindi.ai.anthropic.models.InputMessage;
+import za.co.sindi.ai.anthropic.models.McpServer;
 import za.co.sindi.ai.anthropic.models.Metadata;
+import za.co.sindi.ai.anthropic.models.ServiceTier;
 import za.co.sindi.ai.anthropic.models.Thinking;
 import za.co.sindi.ai.anthropic.models.Tool;
 import za.co.sindi.ai.anthropic.models.ToolChoice;
@@ -36,7 +38,16 @@ public class MessageInput implements Serializable {
 	private int maxTokens;
 	
 	@JsonbProperty
+	private String container;
+	
+	@JsonbProperty("mcp_servers")
+	private McpServer[] mcpServers;
+	
+	@JsonbProperty
 	private Metadata metadata;
+	
+	@JsonbProperty("service_tier")
+	private ServiceTier serviceTier;
 	
 	@JsonbProperty("stop_sequences")
 	private String[] stopSequences;
@@ -103,6 +114,34 @@ public class MessageInput implements Serializable {
 	}
 
 	/**
+	 * @return the container
+	 */
+	public String getContainer() {
+		return container;
+	}
+
+	/**
+	 * @param container the container to set
+	 */
+	public void setContainer(String container) {
+		this.container = container;
+	}
+
+	/**
+	 * @return the mcpServers
+	 */
+	public McpServer[] getMcpServers() {
+		return mcpServers;
+	}
+
+	/**
+	 * @param mcpServers the mcpServers to set
+	 */
+	public void setMcpServers(McpServer[] mcpServers) {
+		this.mcpServers = mcpServers;
+	}
+
+	/**
 	 * @return the metadata
 	 */
 	public Metadata getMetadata() {
@@ -114,6 +153,20 @@ public class MessageInput implements Serializable {
 	 */
 	public void setMetadata(Metadata metadata) {
 		this.metadata = metadata;
+	}
+
+	/**
+	 * @return the serviceTier
+	 */
+	public ServiceTier getServiceTier() {
+		return serviceTier;
+	}
+
+	/**
+	 * @param serviceTier the serviceTier to set
+	 */
+	public void setServiceTier(ServiceTier serviceTier) {
+		this.serviceTier = serviceTier;
 	}
 
 	/**

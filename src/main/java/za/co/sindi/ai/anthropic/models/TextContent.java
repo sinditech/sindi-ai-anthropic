@@ -15,7 +15,7 @@ public class TextContent extends CacheControlContent {
 	private String text;
 	
 	@JsonbProperty
-	private RequestLocationCitation[] citations;
+	private LocationCitation[] citations;
 
 	/**
 	 * @return the text
@@ -34,14 +34,14 @@ public class TextContent extends CacheControlContent {
 	/**
 	 * @return the citations
 	 */
-	public RequestLocationCitation[] getCitations() {
+	public LocationCitation[] getCitations() {
 		return citations;
 	}
 
 	/**
 	 * @param citations the citations to set
 	 */
-	public void setCitations(RequestLocationCitation[] citations) {
+	public void setCitations(LocationCitation[] citations) {
 		this.citations = citations;
 	}
 }

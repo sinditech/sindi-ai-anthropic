@@ -10,16 +10,19 @@ import jakarta.json.bind.annotation.JsonbProperty;
  * @author Buhake Sindi
  * @since 16 March 2024
  */
-public class ServerToolUseContent extends CacheControlContent {
+public class MCPToolUseContent extends CacheControlContent {
 
 	@JsonbProperty
 	private String id;
 	
 	@JsonbProperty
-	private String name = "web_search";
+	private String name;
 	
 	@JsonbProperty
 	private JsonObject input;
+	
+	@JsonbProperty("server_name")
+	private String serverName;
 
 	/**
 	 * @return the id
@@ -61,5 +64,19 @@ public class ServerToolUseContent extends CacheControlContent {
 	 */
 	public void setInput(JsonObject input) {
 		this.input = input;
+	}
+
+	/**
+	 * @return the serverName
+	 */
+	public String getServerName() {
+		return serverName;
+	}
+
+	/**
+	 * @param serverName the serverName to set
+	 */
+	public void setServerName(String serverName) {
+		this.serverName = serverName;
 	}
 }

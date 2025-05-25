@@ -6,7 +6,7 @@ import jakarta.json.bind.annotation.JsonbProperty;
  * @author Buhake Sindi
  * @since 01 February 2024
  */
-public class RequestWebSearchResultLocationCitation extends RequestLocationCitation {
+public class WebSearchResultLocationCitation extends LocationCitation {
 
 	@JsonbProperty("encrypted_index")
 	private String encryptedIndex;

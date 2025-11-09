@@ -121,7 +121,7 @@ public class AnthropicAPIClient implements APIClient {
 		return httpResponseAsync.thenApplyAsync(httpResponse -> {
 			validateHttpResponse(httpResponse);
 			return objectTransformer.transform(httpResponse.body().getLeft(), responseType);
-		}).toCompletableFuture();
+		});
 	}
 
 	@Override
@@ -143,7 +143,7 @@ public class AnthropicAPIClient implements APIClient {
 		return httpResponseAsync.thenApplyAsync(httpResponse -> {
 			validateHttpResponse(httpResponse);
 			return objectTransformer.transform(httpResponse.body().getLeft(), responseType);
-		}).toCompletableFuture();
+		});
 	}
 	
 	/* (non-Javadoc)
@@ -175,7 +175,7 @@ public class AnthropicAPIClient implements APIClient {
 		return httpResponseAsync.thenApplyAsync(httpResponse -> {
 			validateHttpResponse(httpResponse);
 			return handleStream(sseEventHandler.getEventStream());
-		}).toCompletableFuture();
+		});
 	}
 	
 	private HttpRequest.Builder createGETHttpRequestBuilder(final URI uri) {
